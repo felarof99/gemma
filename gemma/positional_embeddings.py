@@ -59,6 +59,7 @@ def apply_rope(
   sin = jnp.sin(sinusoid_inp)
   cos = jnp.cos(sinusoid_inp)
 
+  # This is where the actual rotation happens. The input is split in half along the last dimension. Then, each half is rotated using the sine and cosine values calculated earlier. This rotation is what encodes the positional information into the embeddings.
   first_half, second_half = jnp.split(inputs, 2, axis=-1)
   first_part = first_half * cos - second_half * sin
   second_part = second_half * cos + first_half * sin
